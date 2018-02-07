@@ -1,0 +1,40 @@
+<resources>
+    <!--app titles-->
+    <string name="app_name">VoiceRater</string>
+    <string name="title_activity_aa">Sign In</string>
+    <string name="title_activity_ab">Welcome Page</string>
+    <string name="title_activity_ac">Sign Up</string>
+    <string name="title_activity_ba">Record</string>
+    <string name="title_activity_c">Result</string>
+
+    <!-- strings for buttons -->
+    <string name="logout">Log Out</string>
+    <string name="exit">Exit</string>
+    <string name="signup">Sign Up</string>
+    <string name="signin">Sign In</string>
+    <string name="submit">Submit</string>
+    <string name="retry">Retry</string>
+
+    <!-- strings for descriptions -->
+    <string name="startbtn">start button</string>
+    <string name="logo">logo image</string>
+
+    <!-- strings for texts -->
+    <string name="result">Results</string>
+    <string name="userID">UserID</string>
+    <string name="password">Password</string>
+    <string name="loading">Now Loading......</string>
+    <string name="initialtimer">02:00</string>
+    <string name="showpw">show password</string>
+
+    <string name="info_id">User ID :</string>
+    <string name="info_pw">Password :</string>
+    <string name="info_pwre">Password (reinput) :</string>
+    <string name="info_birth">Year of Birth :</string>
+    <string name="info_gender">gender :</string>
+    <string name="info_male">Male</string>
+    <string name="info_female">Female</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
