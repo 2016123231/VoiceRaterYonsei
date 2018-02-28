@@ -99,7 +99,7 @@ public class Aa extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... unused) {
 
-            result = "url not connected. try again.";
+            result = "네트워크 확인 후 다시 시도해주세요.";
             HttpURLConnection con;
 
             //set post method
@@ -123,14 +123,12 @@ public class Aa extends AppCompatActivity {
                 toPost.flush();
                 toPost.close();
 
-                result = "connection failed. try again";
-
                 //check response code
                 int responseCode = con.getResponseCode();
                 if(responseCode==200){
                     result = "login completed";
                 }else if(responseCode==400){
-                    result = "check your id or password";
+                    result = "아이디와 비밀번호를 확인하세요.";
                     return result;
                 }else{
                     result = "server error: " + responseCode + "ERROR";

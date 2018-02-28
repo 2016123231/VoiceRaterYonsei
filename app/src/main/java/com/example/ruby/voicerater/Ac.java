@@ -284,29 +284,29 @@ public class Ac extends AppCompatActivity {
             public void onClick(View view) {
                 for(int i=0;i<info.length;i++){
                     if(info[i].getText().length()==0){
-                        Toast.makeText(getApplicationContext(), "Please input all the informations", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "모든 정보를 기입해주세요.", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
                 String pwString = info[1].getText().toString();
                 if(pwString.length() < 8){
-                    Toast.makeText(getApplicationContext(), "Password not valid. Should be over 8 digits", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "패스워드는 8자 이상이며, 문자와 숫자를 모두 포함해야 합니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if( ( !pwString.matches(".*\\d+.*") ) || pwString.matches("[0-9]+") ){
-                    Toast.makeText(getApplicationContext(), "Password not valid. Should contain alphabet and numeric value", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "패스워드는 8자 이상이며, 문자와 숫자를 모두 포함해야 합니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(birth == 0){
-                    Toast.makeText(getApplicationContext(), "Please input your year of birth", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "출생연도를 바르게 기입해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(genderGroup.getCheckedRadioButtonId()==-1){
-                    Toast.makeText(getApplicationContext(), "Please input your gender", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "성별을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(!pwChecked(info[1].getText().toString(), info[2].getText().toString())){
-                    Toast.makeText(getApplicationContext(), "Password does not match the confirm password. Check the password again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "패스워드가 서로 일치하지 않습니다. 확인 후 재시도해주십시오.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

@@ -186,7 +186,7 @@ public class Ba extends Activity {
 
                     result = "completed";
                 }else{
-                    result = "connection error: " + responseCode+"\ncheck your network and try again.";
+                    result = "connection error: " + responseCode+"\n네트워크를 확인해주세요.";
                     BufferedReader rd;
 
                     InputStream str = con.getInputStream();
@@ -228,7 +228,7 @@ public class Ba extends Activity {
 
     //sampleText methods
     public void getText(){
-        GetStatic getStatic = new GetStatic(getResources().getString(R.string.domain)+"/statics/?text/");
+        GetStatic getStatic = new GetStatic(getResources().getString(R.string.domain)+"statics/?text/");
         getStatic.execute();
     }
     public class GetStatic extends AsyncTask<Void, Void, String>{
@@ -305,7 +305,7 @@ public class Ba extends Activity {
             public void onTick(long l) {
                 if(curLeft<=0){
                     stopBtn.performClick();
-                    Toast.makeText(getApplicationContext(),"TIME OVER", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"제한시간이 끝났습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 curLeft -= 1;
@@ -331,9 +331,9 @@ public class Ba extends Activity {
             public void onFinish() {
                 String msg;
                 if(curLeft>0){
-                    msg = "PRESS SUBMIT TO GET THE RATE";
+                    msg = "제출 버튼을 클릭하면 평가결과를 확인할 수 있습니다.";
                 }else{
-                    msg = "TIME OVER";
+                    msg = "제한시간이 끝났습니다.";
                 }
                 Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_SHORT).show();
                 stopBtn.performClick();
@@ -473,7 +473,7 @@ public class Ba extends Activity {
         //set recorder
         recorder = createAudioRecord();
         if(recorder==null){
-            Toast.makeText(getApplicationContext(), "recorder not created. try again.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "recorder not created. try again.\n다시 시도해 주십시오.", Toast.LENGTH_SHORT).show();
         }
         recorder.startRecording();
         recordingThread = new Thread(new Runnable() {
@@ -616,7 +616,7 @@ public class Ba extends Activity {
 
                 //send to server
 
-                String urlToSend = getResources().getString(R.string.domain)+"/recordings/";
+                String urlToSend = getResources().getString(R.string.domain)+"recordings/";
 //                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlToSend)));
 
                 uploadRecFile upload = new uploadRecFile(wavPath, urlToSend);
