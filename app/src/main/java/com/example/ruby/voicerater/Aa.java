@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+//custom edittext to respond to back-key-pressed event
 class MyEditText extends android.support.v7.widget.AppCompatEditText{
 
     private OnBackPressedListener listener;
@@ -45,7 +47,7 @@ class MyEditText extends android.support.v7.widget.AppCompatEditText{
 
     //lister method
     public interface OnBackPressedListener{
-        void onBackPress();
+        public void onBackPress();
     }
     public void setOnBackPressedListener(OnBackPressedListener l){
         listener = l;
@@ -73,8 +75,7 @@ public class Aa extends AppCompatActivity {
         mProgressView.setVisibility(View.VISIBLE);
 
         // link server
-        String url = "http://165.132.58.192:8000/api-token-auth/";
-//        String url = "http://172.24.113.44:8000/api-token-auth/";
+        String url = getResources().getString(R.string.domain)+"api-token-auth/";
 
         //get user information
         String userInfo = "username="+id.getText().toString()+"&password="+pw.getText().toString();
@@ -201,11 +202,18 @@ public class Aa extends AppCompatActivity {
     private ImageView logo;
     private TextView signUp;
 
-    boolean signedIn = false;
+    boolean signedIn = false;//true if log-in finished
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int windowHeight = displayMetrics.heightPixels;
+        int windowWidth = displayMetrics.widthPixels;
+        System.out.println(windowWidth);
+
         setContentView(R.layout.activity_aa);
 
         //if logged in, start at Ab.
@@ -215,7 +223,7 @@ public class Aa extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), Ab.class));
         }
 
-        logo = findViewById(R.id.logo);
+        logo = (ImageView) findViewById(R.id.logo);
 
         // Set up the login form.
         id = findViewById(R.id.id);
@@ -246,7 +254,7 @@ public class Aa extends AppCompatActivity {
             }
         });
 
-        pw = findViewById(R.id.password);
+        pw = (MyEditText) findViewById(R.id.password);
         pw.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -283,7 +291,7 @@ public class Aa extends AppCompatActivity {
             }
         });
 
-        signUp = findViewById(R.id.signUp);
+        signUp = (TextView) findViewById(R.id.signUp);
         signUp.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -291,7 +299,7 @@ public class Aa extends AppCompatActivity {
             }
         });
 
-        Button signIn = findViewById(R.id.signIn);
+        Button signIn = (Button) findViewById(R.id.signIn);
         signIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

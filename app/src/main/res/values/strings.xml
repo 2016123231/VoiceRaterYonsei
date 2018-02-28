@@ -1,6 +1,18 @@
 <resources>
-    <!--app titles-->
+    <!--app titles & server domain-->
     <string name="app_name">VoiceRater</string>
+    <string name="domain">http://165.132.58.192:8000/</string>
+    
+    <!--result parameters-->
+    <string name="param_1">점수 1</string>
+    <string name="param_2">점수 2</string>
+    <string name="param_3">점수 3</string>
+    <string name="param_4">점수 4</string>
+    <string name="param_5">점수 5</string>
+    <string name="param_6">점수 6</string>
+    <string name="param_7">점수 7</string>
+
+    <!--activities-->
     <string name="title_activity_aa">Sign In</string>
     <string name="title_activity_ab">Welcome Page</string>
     <string name="title_activity_ac">Sign Up</string>
@@ -8,12 +20,12 @@
     <string name="title_activity_c">Result</string>
 
     <!-- strings for buttons -->
-    <string name="logout">Log Out</string>
-    <string name="exit">Exit</string>
-    <string name="signup">Sign Up</string>
-    <string name="signin">Sign In</string>
-    <string name="submit">Submit</string>
-    <string name="retry">Retry</string>
+    <string name="logout">로그아웃</string>
+    <string name="exit">종료</string>
+    <string name="signup">회원가입</string>
+    <string name="signin">로그인</string>
+    <string name="submit">제출하기</string>
+    <string name="retry">다시하기</string>
 
     <!-- strings for descriptions -->
     <string name="startbtn">start button</string>
@@ -25,16 +37,15 @@
     <string name="password">Password</string>
     <string name="loading">Now Loading......</string>
     <string name="initialtimer">02:00</string>
-    <string name="showpw">show password</string>
+    <string name="showpw">패스워드 보이기</string>
+    <string name="useridinit">-유저 정보가 로드되지 않음-</string>
 
-    <string name="info_id">User ID :</string>
-    <string name="info_pw">Password :</string>
-    <string name="info_pwre">Password (reinput) :</string>
-    <string name="info_birth">Year of Birth :</string>
-    <string name="info_gender">gender :</string>
-    <string name="info_male">Male</string>
-    <string name="info_female">Female</string>
+    <string name="info_id">아이디 :</string>
+    <string name="info_pw">패스워드 :</string>
+    <string name="info_pwre">패스워드 재입력 :</string>
+    <string name="info_birth">출생연도 :</string>
+    <string name="info_gender">성별 :</string>
+    <string name="info_male">남성</string>
+    <string name="info_female">여성</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

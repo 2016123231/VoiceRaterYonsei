@@ -28,8 +28,9 @@
                 android:id="@+id/userId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:textSize="32sp"
+                android:gravity="center"
+                android:text="@string/useridinit"
+                android:textSize="34sp"
                 android:maxLines="2"
 
                 android:layout_marginTop="10dp"
@@ -46,9 +47,9 @@
             <ImageButton
                 android:contentDescription="@string/startbtn"
                 android:id="@+id/start"
-                android:layout_width="150dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:layout_centerInParent="true"
@@ -64,8 +65,8 @@
 
                 android:orientation="vertical"
                 android:gravity="bottom"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginBottom="30dp">
 
                 <Button
@@ -74,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/logout"
+                    android:textSize="18sp"
                     android:background="@android:color/transparent"/>
 
                 <Button
@@ -82,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="@string/exit"
+                    android:textSize="18sp"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
         </RelativeLayout>

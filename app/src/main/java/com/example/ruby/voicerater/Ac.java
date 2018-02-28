@@ -205,7 +205,6 @@ public class Ac extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 closeDialog();
-//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://172.24.100.14:8000/join/")));
                 mProgressView.setVisibility(View.GONE);
             }
         });
@@ -217,8 +216,7 @@ public class Ac extends AppCompatActivity {
 
     private void postDB(){
         String userParam = "username=" + info[0].getText().toString() + "&password=" + info[1].getText().toString() + "&gender=" + gender.getText().toString() + "&birth=" + birth;
-        String url = "http://165.132.58.192:8000/";
-//        String url = "http://172.24.101.79:8000/";
+        String url = getResources().getString(R.string.domain);
         SignUpPost sPost = new SignUpPost(userParam, url);
         sPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }

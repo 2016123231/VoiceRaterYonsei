@@ -61,6 +61,7 @@ public class Ba extends Activity {
     int playTime;
     CountDownTimer tick;
 
+    //text for users to read
     TextView sampleText;
 
     //buttons to be toggled. initialized on create
@@ -79,25 +80,26 @@ public class Ba extends Activity {
     private final short[] audioFormats = new short[] {AudioFormat.ENCODING_PCM_16BIT, AudioFormat.ENCODING_PCM_8BIT};
     private int sampleRate;
     private short audioFormat;
-    private AudioRecord recorder = null;
-    private Thread recordingThread = null;
-    private Thread playerThread = null;
-    private AudioTrack audioTrack = null;
-    private String wavPath = "";                      // 녹음한 파일을 저장할 경로
-    private File wavFile;
-    private byte[] wavData;
+    private AudioRecord recorder = null; //recorder object
+    private Thread recordingThread = null; //thread for recording
+    private Thread playerThread = null; //thread for playing sound
+    private AudioTrack audioTrack = null; //audio player object
+    private String wavPath = "";//record file path
+    private File wavFile; //file object
+    private byte[] wavData; //file byte-data
 
     public class uploadRecFile extends AsyncTask<Void, Void, String> {
-        String result;
-        String urlString;
-        Bundle resultBundle;
+        String result;//result after connection
+        String urlString;//server domain url
+        Bundle resultBundle;//user's points to send to result screen
 
+        //strings for writing multitype-part data
         String lineEnd = "\r\n";
         String twoHyphens = "--";
         String boundary = "3FS4PKI7YH9S";
 
-        /**********  File Path *************/
-        final String FILEPATH;
+
+        final String FILEPATH;//recorded file's path
 
         private uploadRecFile(String filePath, String url) {
             FILEPATH = filePath;
@@ -226,7 +228,7 @@ public class Ba extends Activity {
 
     //sampleText methods
     public void getText(){
-        GetStatic getStatic = new GetStatic("http://165.132.58.192:8000/statics/?text/");
+        GetStatic getStatic = new GetStatic(getResources().getString(R.string.domain)+"/statics/?text/");
         getStatic.execute();
     }
     public class GetStatic extends AsyncTask<Void, Void, String>{
@@ -614,7 +616,7 @@ public class Ba extends Activity {
 
                 //send to server
 
-                String urlToSend = "http://165.132.58.192:8000/recordings/";
+                String urlToSend = getResources().getString(R.string.domain)+"/recordings/";
 //                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlToSend)));
 
                 uploadRecFile upload = new uploadRecFile(wavPath, urlToSend);

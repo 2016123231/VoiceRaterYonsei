@@ -1,5 +1,7 @@
 package com.example.ruby.voicerater;
 
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ public class BarGraph extends Fragment {
 
     Bundle params;
     int length;
+    ProgressBar[] progressBars;
 
     public BarGraph(){
         params = new Bundle(0);
@@ -26,6 +29,7 @@ public class BarGraph extends Fragment {
         super.setArguments(args);
         params = args;
         length = args.size();
+        progressBars = new ProgressBar[length];
     }
 
     private void setGraph(FrameLayout layout){
@@ -36,13 +40,18 @@ public class BarGraph extends Fragment {
             View view = getLayoutInflater().inflate(R.layout.bar_graph_layout, table,false);
             TextView name = view.findViewById(R.id.tagName);
             ProgressBar valueGraph = view.findViewById(R.id.valueGraph);
+            progressBars[i] = valueGraph;
             TextView valueNum = view.findViewById(R.id.valueNum);
 
             String curKey = "p" + (i+1);
+            name.setText(getResources().getString(getResources().getIdentifier("param_"+(i+1),"string","com.example.ruby.voicerater")));
             double curValue = params.getDouble(curKey);
             int curValueToInt = (int) ( curValue * 1000 );
-            name.setText(curKey);
-            valueGraph.setProgress(curValueToInt);
+            if(Build.VERSION.SDK_INT >= 24){
+                valueGraph.setProgress(curValueToInt, true);
+            }else{
+                valueGraph.setProgress(curValueToInt);
+            }
             String toDisplay = curValue + "/10.0";
             valueNum.setText(toDisplay);
 
@@ -61,6 +70,7 @@ public class BarGraph extends Fragment {
     {
         FrameLayout layout = (FrameLayout) inflater.inflate(R.layout.fragment_bar_graph, container, false);
         setGraph(layout);
+
         return layout;
     }
 }

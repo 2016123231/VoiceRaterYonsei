@@ -24,8 +24,7 @@ public class Ab extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
 
-    private boolean toDestroy;
-    String sentId = "";
+    private boolean toDestroy;//true if user logged out, so activity has to be destroyed
 
     public void logout(){
         //renew Session
@@ -119,21 +118,21 @@ public class Ab extends AppCompatActivity {
         int sdwPermitted = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if(rPermitted != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)){
-                toRePermit.add("record_audio");
+                toRePermit.add("마이크");
             }else{
                 toPermit.add(Manifest.permission.RECORD_AUDIO);
             }
         }
         if(sdrPermitted != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-                toRePermit.add("read_external_storage");
+                toRePermit.add("저장공간(읽기)");
             }else{
                 toPermit.add(Manifest.permission.READ_EXTERNAL_STORAGE);
             }
         }
         if(sdwPermitted != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-                toRePermit.add("write_external_storage");
+                toRePermit.add("저장공간(쓰기)");
             }else{
                 toPermit.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             }
@@ -146,11 +145,11 @@ public class Ab extends AppCompatActivity {
 
         if(toRePermit.size() != 0){
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-            String msg = "Cannot service without given permissions:";
+            String msg = "서비스를 위해 다음의 권한이 필요합니다.:";
             for(int i=0;i<toRePermit.size();i++){
                 msg += "\n- " + toRePermit.get(i);
             }
-            msg += "\nAllow following permissions!";
+            msg += "\n다음의 권한을 수락해주세요!";
             builder.setMessage(msg);
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override

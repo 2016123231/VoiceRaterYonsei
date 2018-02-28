@@ -12,7 +12,8 @@ import android.widget.Button;
 
 public class C extends AppCompatActivity {
 
-    Bundle result;
+    Bundle result;//bundle sent from activity Ba
+    BarGraph barGraph;//bar-graph-resultscreen
 
     public void setResultScreen(){
         //get result from server <server>
@@ -26,7 +27,7 @@ public class C extends AppCompatActivity {
                 switch(position)
                 {
                     case 0:
-                        Fragment barGraph = new BarGraph();
+                        barGraph = new BarGraph();
                         barGraph.setArguments(result);
                         return barGraph;
                     default:
@@ -48,8 +49,6 @@ public class C extends AppCompatActivity {
                 results.setCurrentItem(tag);
             }
         };
-
-        //draw graph animation <anim>
 
     }
 
@@ -78,13 +77,6 @@ public class C extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_c);
 
-        Button log = findViewById(R.id.log);
-        log.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //move to log
-            }
-        });
         Button exit = findViewById(R.id.exit);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
