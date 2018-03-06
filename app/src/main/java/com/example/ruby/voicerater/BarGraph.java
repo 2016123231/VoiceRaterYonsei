@@ -52,7 +52,7 @@ public class BarGraph extends Fragment {
             }else{
                 valueGraph.setProgress(curValueToInt);
             }
-            String toDisplay = curValue + "/10.0";
+            String toDisplay = curValue + "/6.0";
             valueNum.setText(toDisplay);
 
             table.addView(view);

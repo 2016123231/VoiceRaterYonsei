@@ -1,7 +1,7 @@
 <resources>
     <!--app titles & server domain-->
     <string name="app_name">VoiceRater</string>
-    <string name="domain">http://165.132.58.192:8000/</string>
+    <string name="domain">http://13.124.227.110:8000/</string>
     
     <!--result parameters-->
     <string name="param_1">점수 1</string>
