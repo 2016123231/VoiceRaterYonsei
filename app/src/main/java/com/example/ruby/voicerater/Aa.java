@@ -3,6 +3,7 @@ package com.example.ruby.voicerater;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -96,6 +97,59 @@ public class Aa extends AppCompatActivity {
             this.userInfo = userInfo;
         }
 
+        private void getUserInfo(){
+            HttpURLConnection con;
+
+            //set post method
+            try{
+                //open url with http connection
+                URL url = new URL(getResources().getString(R.string.domain)+"userinfo/");
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.domain)+"user/")));
+                con = (HttpURLConnection) url.openConnection();
+
+                //set requests
+                con.setRequestMethod("GET");
+                con.setRequestProperty("Authorization", "Token " + sharedPreferences.getString("token",""));
+                con.setRequestProperty("Content-Type", "application/json");
+
+                //connect url by http
+                con.connect();
+
+                //check response code
+                int responseCode = con.getResponseCode();
+
+                BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
+
+                String line;
+                String input = "";
+                while ((line = rd.readLine()) != null) {
+                    input += line;
+                }
+
+                String[] splitByIDNum = input.split("\"id_number\":");
+                String id_number = splitByIDNum[1].substring(1,11);
+
+                String[] splitByName = input.split("\"name\":");
+                String[] splitNameAgain = splitByName[1].split("\"");
+                String name = splitNameAgain[1];
+
+                //save id_number and name in sharedpreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("id_number", id_number);
+                editor.putString("name", name);
+                editor.apply();
+
+            } catch (MalformedURLException e) { // for URL.
+                result = "AND ERROR : " + e.getMessage();
+                System.out.println("exception: "+e.getMessage());
+                e.printStackTrace();
+            } catch (IOException e) { // for openConnection().
+                result = "AND ERROR : " + e.getMessage();
+                System.out.println("exception: "+e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
         @Override
         protected String doInBackground(Void... unused) {
 
@@ -175,6 +229,9 @@ public class Aa extends AppCompatActivity {
                 result = "shared perference error : cannot attach log-in information";
                 e.printStackTrace();
             }
+
+//            getUserInfo();
+
             return result;
         }
 

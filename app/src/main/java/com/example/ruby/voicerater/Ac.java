@@ -188,10 +188,11 @@ public class Ac extends AppCompatActivity {
     }
 
     private AlertDialog dialog;
-    private void attemptSignUp(String id, String gender, String birth){
+    private void attemptSignUp(){
         mProgressView.setVisibility(View.VISIBLE);
         AlertDialog.Builder ask = new AlertDialog.Builder(this);
-        ask.setMessage("Summit with this information?\nID: "+id+"\ngender: "+gender+"\nyear of birth: "+birth);
+        ask.setMessage("Summit with this information?\n이름: "+info[0].getText().toString()+"\n학번: "+info[1].getText().toString()
+                +"\nID: "+info[2].getText().toString()+"\ngender: "+gender.getText().toString()+"\nyear of birth: "+birth);
         ask.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -215,7 +216,8 @@ public class Ac extends AppCompatActivity {
     }
 
     private void postDB(){
-        String userParam = "username=" + info[0].getText().toString() + "&password=" + info[1].getText().toString() + "&gender=" + gender.getText().toString() + "&birth=" + birth;
+        String userParam = "username=" + info[2].getText().toString() + "&password=" + info[3].getText().toString() + "&gender=" + gender.getText().toString()
+                + "&birth=" + birth + "&id_number=" + info[1].getText().toString() + "&name=" + info[0].getText().toString();
         String url = getResources().getString(R.string.domain);
         SignUpPost sPost = new SignUpPost(userParam, url);
         sPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -231,16 +233,18 @@ public class Ac extends AppCompatActivity {
         setContentView(R.layout.activity_ac);
 
         //set EditTexts(username, password, password2)
-        info = new MyEditText[3];
-        info[0] = findViewById(R.id.id);
-        info[1] = findViewById(R.id.password);
-        info[2] = findViewById(R.id.passwordRe);
+        info = new MyEditText[5];
+        info[0] = findViewById(R.id.studentname);
+        info[1] = findViewById(R.id.studentid);
+        info[2] = findViewById(R.id.id);
+        info[3] = findViewById(R.id.password);
+        info[4] = findViewById(R.id.passwordRe);
         for(int i=0;i<info.length;i++){
             setEditText(i);
         }
 
         //set checkbox(password show)
-        setCheckBox(1,2);
+        setCheckBox(3,4);
 
         //set spinner(year of birth)
             Spinner spinner = findViewById(R.id.spinner);
@@ -288,7 +292,7 @@ public class Ac extends AppCompatActivity {
                         return;
                     }
                 }
-                String pwString = info[1].getText().toString();
+                String pwString = info[3].getText().toString();
                 if(pwString.length() < 8){
                     Toast.makeText(getApplicationContext(), "패스워드는 8자 이상이며, 문자와 숫자를 모두 포함해야 합니다.", Toast.LENGTH_SHORT).show();
                     return;
@@ -305,13 +309,13 @@ public class Ac extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "성별을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(!pwChecked(info[1].getText().toString(), info[2].getText().toString())){
+                if(!pwChecked(info[3].getText().toString(), info[4].getText().toString())){
                     Toast.makeText(getApplicationContext(), "패스워드가 서로 일치하지 않습니다. 확인 후 재시도해주십시오.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 gender = findViewById(genderGroup.getCheckedRadioButtonId());
-                attemptSignUp(info[0].getText().toString(), gender.getText().toString(), ""+birth);
+                attemptSignUp();
 
             }
         });

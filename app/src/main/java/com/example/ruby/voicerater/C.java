@@ -85,7 +85,7 @@ public class C extends AppCompatActivity {
             }
         });
 
-        setResultScreen();
+//        setResultScreen();
     }
 
     //remove activity when its off screen

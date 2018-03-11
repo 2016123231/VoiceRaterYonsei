@@ -120,8 +120,11 @@ public class Ba extends Activity {
 
                 DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 
+                String filename = sharedPreferences.getString("id_number","0000000000")+sharedPreferences.getString("name","null")+".wav";
+                System.out.println(filename);
+
                 wr.writeBytes(lineEnd + twoHyphens + boundary + lineEnd);
-                wr.writeBytes("Content-Disposition: form-data; name=\"datafile\"; filename=\"rec.wav\"" + lineEnd);
+                wr.writeBytes("Content-Disposition: form-data; name=\"datafile\"; filename=\""+filename+"\"" + lineEnd);
                 wr.writeBytes("Content-Type: audio/wav" + lineEnd);
                 wr.writeBytes("Content-Transfer-Encoding: binary" + lineEnd);
                 wr.writeBytes(lineEnd);
@@ -172,7 +175,8 @@ public class Ba extends Activity {
                     System.out.println(responseLine);
 
                     String[] resultSplit = responseLine.split("\"result\":");
-                    StringTokenizer tk = new StringTokenizer(resultSplit[1].substring(2,resultSplit[1].length()-3), ",");
+                    String[] resultSplitAgain = resultSplit[1].split("\"");
+                    StringTokenizer tk = new StringTokenizer(resultSplitAgain[1].substring(1,resultSplitAgain[1].length()-1), ",");
 
                     int tkCount = tk.countTokens();
                     if(tkCount==0){
@@ -201,6 +205,7 @@ public class Ba extends Activity {
                 }
 
             }catch(Exception e){
+                result = "error occurred. try again: "+ e.getMessage();
                 e.printStackTrace();
             }
 

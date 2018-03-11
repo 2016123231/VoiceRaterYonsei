@@ -1,7 +1,7 @@
 <resources>
     <!--app titles & server domain-->
     <string name="app_name">VoiceRater</string>
-    <string name="domain">http://13.124.227.110:8000/</string>
+    <string name="domain">http://165.132.120.188:8000/</string>
     
     <!--result parameters-->
     <string name="param_1">점수 1</string>
@@ -32,7 +32,7 @@
     <string name="logo">logo image</string>
 
     <!-- strings for texts -->
-    <string name="result">Results</string>
+    <string name="result">감사합니다!</string>
     <string name="userID">UserID</string>
     <string name="password">Password</string>
     <string name="loading">Now Loading......</string>
@@ -47,5 +47,7 @@
     <string name="info_gender">성별 :</string>
     <string name="info_male">남성</string>
     <string name="info_female">여성</string>
+    <string name="info_studentID">학번</string>
+    <string name="info_studentName">이름</string>
 
 </resources>
