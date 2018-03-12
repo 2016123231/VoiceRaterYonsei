@@ -110,6 +110,7 @@ public class Aa extends AppCompatActivity {
                 //set requests
                 con.setRequestMethod("GET");
                 con.setRequestProperty("Authorization", "Token " + sharedPreferences.getString("token",""));
+                con.setRequestProperty("Accept-Charset", "UTF-8");
                 con.setRequestProperty("Content-Type", "application/json");
 
                 //connect url by http
@@ -133,11 +134,22 @@ public class Aa extends AppCompatActivity {
                 String[] splitNameAgain = splitByName[1].split("\"");
                 String name = splitNameAgain[1];
 
+                String[] splitGender = input.split("\"gender\":");
+                String[] splitGenderAgain = splitGender[1].split("\"");
+                String gender = splitGenderAgain[1];
+
+                String[] splitAge = input.split("\"birth\":");
+                String[] splitAgeAgain = splitAge[1].split("\"");
+                String age = splitAgeAgain[1];
+
                 //save id_number and name in sharedpreferences
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("id_number", id_number);
-                editor.putString("name", name);
-                editor.apply();
+                editor.putString("id_number", id_number)
+                        .putString("name", name)
+                        .putString("gender", gender)
+                        .putString("birth", age)
+                        .apply();
+                System.out.println("*****"+name+" "+gender+" "+age+" "+id_number);
 
             } catch (MalformedURLException e) { // for URL.
                 result = "AND ERROR : " + e.getMessage();
@@ -230,7 +242,7 @@ public class Aa extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-//            getUserInfo();
+            getUserInfo();
 
             return result;
         }

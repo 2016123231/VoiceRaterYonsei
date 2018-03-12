@@ -114,6 +114,7 @@ public class Ba extends Activity {
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
                 con.setRequestProperty("Authorization", "Token " + sharedPreferences.getString("token",""));
+                con.setRequestProperty("Accept-Charset", "UTF-8");
                 con.setRequestMethod("POST");
                 con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
                 con.setDoOutput(true);
@@ -153,6 +154,36 @@ public class Ba extends Activity {
                 wr.writeBytes("Content-Disposition: form-data; name=\"device\";" + lineEnd);
                 wr.writeBytes(lineEnd);
                 wr.writeBytes(deviceInfo + lineEnd);
+                wr.writeBytes(twoHyphens + boundary + lineEnd);
+
+                //write id_number, name, gender, birth information
+                wr.writeBytes("Content-Disposition: form-data; name=\"id_number\";" + lineEnd);
+                wr.writeBytes(lineEnd);
+                wr.writeBytes(sharedPreferences.getString("id_number","unknown") + lineEnd);
+                wr.writeBytes(twoHyphens + boundary + lineEnd);
+
+                wr.writeBytes("Content-Disposition: form-data; name=\"name\";" + lineEnd);
+                wr.writeBytes(lineEnd);
+                wr.write(sharedPreferences.getString("name","unknown").getBytes("UTF-8"));
+                wr.writeBytes(lineEnd);
+                wr.writeBytes(twoHyphens + boundary + lineEnd);
+
+                wr.writeBytes("Content-Disposition: form-data; name=\"filename\";" + lineEnd);
+                wr.writeBytes(lineEnd);
+                wr.write(filename.getBytes("UTF-8"));
+                wr.writeBytes(lineEnd);
+                wr.writeBytes(twoHyphens + boundary + lineEnd);
+
+
+                wr.writeBytes("Content-Disposition: form-data; name=\"gender\";" + lineEnd);
+                wr.writeBytes(lineEnd);
+                wr.write(sharedPreferences.getString("gender","unknown").getBytes("UTF-8"));
+                wr.writeBytes(lineEnd);
+                wr.writeBytes(twoHyphens + boundary + lineEnd);
+
+                wr.writeBytes("Content-Disposition: form-data; name=\"birth\";" + lineEnd);
+                wr.writeBytes(lineEnd);
+                wr.writeBytes(sharedPreferences.getString("birth","unknown") + lineEnd);
 
                 //finish writing and send
                 wr.writeBytes("\r\n--" + boundary + "--\r\n");
@@ -205,7 +236,7 @@ public class Ba extends Activity {
                 }
 
             }catch(Exception e){
-                result = "error occurred. try again: "+ e.getMessage();
+//                result = "error occurred. try again: "+ e.getMessage();
                 e.printStackTrace();
             }
 
