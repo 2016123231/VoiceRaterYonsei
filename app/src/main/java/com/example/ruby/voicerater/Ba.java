@@ -123,13 +123,20 @@ public class Ba extends Activity {
 
                 DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 
+                //set current time in format
                 SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
                 String formattedDate = df.format(Calendar.getInstance().getTime());
 
-                String filename = sharedPreferences.getString("name","null") + "_" + sharedPreferences.getString("id_number","0000000000")
-                        +"_" + sharedPreferences.getString("gender", "null") +"_"+ formattedDate +".wav";
+                //get name, id_number, gender string
+                String name = sharedPreferences.getString("name","null");
+                String id_number = sharedPreferences.getString("id_number","0000000000");
+                String gender = sharedPreferences.getString("gender", "null");
+
+                //set filename to string
+                String filename = name + "_" + id_number +"_" + gender +"_"+ formattedDate +".wav";
                 System.out.println(filename);
 
+                //load filename to server
                 wr.writeBytes(lineEnd + twoHyphens + boundary + lineEnd);
                 wr.writeBytes("Content-Disposition: form-data; name=\"datafile\"; filename=\""+filename+"\"" + lineEnd);
                 wr.writeBytes("Content-Type: audio/wav" + lineEnd);
