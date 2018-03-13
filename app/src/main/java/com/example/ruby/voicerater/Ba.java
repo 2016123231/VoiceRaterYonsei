@@ -42,6 +42,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.StringTokenizer;
 
 public class Ba extends Activity {
@@ -121,7 +123,11 @@ public class Ba extends Activity {
 
                 DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 
-                String filename = sharedPreferences.getString("id_number","0000000000")+sharedPreferences.getString("name","null")+".wav";
+                SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+                String formattedDate = df.format(Calendar.getInstance().getTime());
+
+                String filename = sharedPreferences.getString("name","null") + "_" + sharedPreferences.getString("id_number","0000000000")
+                        +"_" + sharedPreferences.getString("gender", "null") +"_"+ formattedDate +".wav";
                 System.out.println(filename);
 
                 wr.writeBytes(lineEnd + twoHyphens + boundary + lineEnd);
