@@ -410,6 +410,8 @@ public class Ba extends Activity {
         }
         return null;
     }
+
+    //wav header writing
     public static void writeWavHeader(OutputStream out, short channels, int sampleRate, short bitDepth) throws IOException {
         //write exact bit-depth
         short bps = (bitDepth==AudioFormat.ENCODING_PCM_16BIT)? (short) 16: (short) 8;
@@ -472,15 +474,18 @@ public class Ba extends Activity {
             }
         }
     }
-    // 실제 녹음한 data를 file에 쓰는 함수
+
+    // writing wav file
     private void writeAudioDataToFile() {
         String sd = Environment.getExternalStorageDirectory().getAbsolutePath();
+        //setting extension to wav
         wavPath = sd + "/record.wav";
         short[] sData = new short[bufferSize];
         FileOutputStream sWav;
 
         try {
             sWav = new FileOutputStream(wavPath);
+            //writing wav header before record
             writeWavHeader(sWav, (short)AudioFormat.CHANNEL_IN_MONO, sampleRate, audioFormat);
 
             while (nowRecording) {
@@ -491,6 +496,7 @@ public class Ba extends Activity {
 
             sWav.close();
             wavFile = new File(wavPath);
+            //updating wav header after record
             updateWavHeader(wavFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

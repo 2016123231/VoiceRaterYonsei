@@ -85,6 +85,7 @@ public class C extends AppCompatActivity {
             }
         });
 
+        //set result screen
 //        setResultScreen();
     }
 

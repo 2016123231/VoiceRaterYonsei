@@ -274,13 +274,6 @@ public class Aa extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int windowHeight = displayMetrics.heightPixels;
-        int windowWidth = displayMetrics.widthPixels;
-        System.out.println(windowWidth);
-
         setContentView(R.layout.activity_aa);
 
         //if logged in, start at Ab.
